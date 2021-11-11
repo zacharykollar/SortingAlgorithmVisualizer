@@ -1,0 +1,9 @@
+button {
+    min-height: 10px;
+}
+.worker {
+    min-width: 500px;
+}
+#button4{
+   color: fuchsia; 
+}
