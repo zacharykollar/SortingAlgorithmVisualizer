@@ -1,15 +1,13 @@
 button {
   min-height: 10px;
 }
-.worker {
-  min-width: 500px;
-}
-#button4 {
-  color: fuchsia;
+#col4 {
+  color: black;
 }
 p {
-  width: 100px;
+  width: 5%;
+  text-align: center;
+  display: inline-flex;
   background-color: hotpink;
-  display: inline;
   border: 3px solid black;
 }
