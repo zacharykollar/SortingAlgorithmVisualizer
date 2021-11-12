@@ -38,13 +38,14 @@ function changeColGraphics(col, colid) {
   col.style.height = (arr[colid] * 5 + 15).toString() + "px";
 }
 
-function bubbleSort() {
+function bubbleSort(callback) {
   while (!sorted) {
     sorted = true;
     for (let i = 0; i < arr.length - 1; i++) {
       if (arr[i] > arr[i + 1]) {
         sorted = false;
-        setTimeout(swap(arr, i, i + 1), 1000 * i);
+        console.log("madeit");
+        setTimeout(()=>callback(swap(arr, i, i + 1)), 100);
       }
     }
   }
