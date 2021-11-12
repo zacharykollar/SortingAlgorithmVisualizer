@@ -1,8 +1,18 @@
 var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var sorted = false;
 function createArray() {
+  sorted = false;
   for (let i = 0; i < arr.length; i++) {
     arr[i] = Math.floor(Math.random() * 100 + 1);
   }
+}
+
+function randArray() {
+  sorted = false;
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = Math.floor(Math.random() * 100 + 1);
+  }
+  changeCols();
 }
 
 function loadVisuals() {
@@ -17,7 +27,6 @@ function loadVisuals() {
 }
 
 function changeCols() {
-  createArray();
   for (let i = 0; i < arr.length; i++) {
     var b = document.getElementById("col" + i.toString());
     changeColGraphics(b, i);
@@ -26,6 +35,25 @@ function changeCols() {
 
 function changeColGraphics(col, colid) {
   col.innerHTML = arr[colid].toString();
-  console.log((arr[colid]*5).toString()+"px");
-  col.style.height = (arr[colid] * 5).toString() + "px";
+  col.style.height = (arr[colid] * 5 + 15).toString() + "px";
+}
+
+function bubbleSort() {
+  while (!sorted) {
+    sorted = true;
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        sorted = false;
+        setTimeout(swap(arr, i, i + 1), 1000 * i);
+      }
+    }
+  }
+}
+
+function swap(list, first, second) {
+  console.log("swapp");
+  var a = list[first];
+  list[first] = list[second];
+  list[second] = a;
+  changeCols();
 }
