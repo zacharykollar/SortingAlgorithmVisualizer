@@ -36,16 +36,24 @@ function changeCols() {
 function changeColGraphics(col, colid) {
   col.innerHTML = arr[colid].toString();
   col.style.height = (arr[colid] * 5 + 15).toString() + "px";
+  //sorted = false;
 }
 
-function bubbleSort(callback) {
+async function bubbleSort(callback) {
   while (!sorted) {
     sorted = true;
     for (let i = 0; i < arr.length - 1; i++) {
       if (arr[i] > arr[i + 1]) {
-        sorted = false;
+        //sorted = false;
         console.log("madeit");
-        setTimeout(()=>callback(swap(arr, i, i + 1)), 100);
+        //setTimeout(()=>{(console.log("timeout"))}, 10);
+        //setTimeout(()=>{callback(arr, i, i + 1)}, 250 * i);
+        await swap(arr, i, i + 1);
+      }
+    }
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        sorted = false;
       }
     }
   }
@@ -53,8 +61,11 @@ function bubbleSort(callback) {
 
 function swap(list, first, second) {
   console.log("swapp");
-  var a = list[first];
-  list[first] = list[second];
-  list[second] = a;
-  changeCols();
+  setTimeout(() => {
+    console.log("timeout");
+    var a = list[first];
+    list[first] = list[second];
+    list[second] = a;
+    changeCols();
+  }, 100 * first);
 }
