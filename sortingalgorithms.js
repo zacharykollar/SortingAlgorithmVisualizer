@@ -18,7 +18,7 @@ function randArray() {
 function loadVisuals() {
   createArray();
   for (let i = 0; i < arr.length; i++) {
-    var b = document.createElement("P");
+    let b = document.createElement("P");
     changeColGraphics(b, i);
     b.classList.className = "worker";
     b.id = "col" + i.toString();
@@ -26,16 +26,20 @@ function loadVisuals() {
   }
 }
 
-function changeCols() {
+async function changeCols() {
   for (let i = 0; i < arr.length; i++) {
-    var b = document.getElementById("col" + i.toString());
-    changeColGraphics(b, i);
+    let b = document.getElementById("col" + i.toString());
+    await changeColGraphics(b, i);
   }
 }
 
-function changeColGraphics(col, colid) {
-  col.innerHTML = arr[colid].toString();
-  col.style.height = (arr[colid] * 5 + 15).toString() + "px";
+async function changeColGraphics(col, colid) {
+  setTimeout(() => {
+    console.log("timeout");
+    col.innerHTML = arr[colid].toString();
+    col.style.height = (arr[colid] * 5 + 15).toString() + "px";
+  }, 100 * colid);
+
   //sorted = false;
 }
 
@@ -46,7 +50,6 @@ async function bubbleSort(callback) {
       if (arr[i] > arr[i + 1]) {
         //sorted = false;
         console.log("madeit");
-        //setTimeout(()=>{(console.log("timeout"))}, 10);
         //setTimeout(()=>{callback(arr, i, i + 1)}, 250 * i);
         await swap(arr, i, i + 1);
       }
@@ -59,13 +62,14 @@ async function bubbleSort(callback) {
   }
 }
 
-function swap(list, first, second) {
-  console.log("swapp");
-  setTimeout(() => {
-    console.log("timeout");
-    var a = list[first];
-    list[first] = list[second];
-    list[second] = a;
-    changeCols();
-  }, 100 * first);
+async function swap(list, first, second) {
+  console.log("swapp" + first.toString());
+
+  //setTimeout(() => {
+  //console.log("timeout");
+  let a = list[first];
+  list[first] = list[second];
+  list[second] = a;
+  await changeCols();
+  //}, 100 * first);
 }
