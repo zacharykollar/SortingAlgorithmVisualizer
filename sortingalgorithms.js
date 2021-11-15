@@ -26,50 +26,55 @@ function loadVisuals() {
   }
 }
 
-async function changeCols() {
+function changeCols() {
   for (let i = 0; i < arr.length; i++) {
-    let b = document.getElementById("col" + i.toString());
-    await changeColGraphics(b, i);
+   // setTimeout(() => {
+      let b = document.getElementById("col" + i.toString());
+      changeColGraphics(b, i);
+   // }, 1500 * i);
   }
 }
 
-async function changeColGraphics(col, colid) {
-  setTimeout(() => {
-    console.log("timeout");
-    col.innerHTML = arr[colid].toString();
-    col.style.height = (arr[colid] * 5 + 15).toString() + "px";
-  }, 100 * colid);
-
+function changeColGraphics(col, colid) {
+  //setTimeout(() => {
+  console.log("timeout");
+  col.innerHTML = arr[colid].toString();
+  col.style.height = (arr[colid] * 5 + 15).toString() + "px";
+  //}, 100 * colid);
+  //bubbleSort();
   //sorted = false;
 }
 
-async function bubbleSort(callback) {
-  while (!sorted) {
-    sorted = true;
+function bubbleSort(callback) {
+  //while (!sorted) {
+  //  sorted = true;
     for (let i = 0; i < arr.length - 1; i++) {
       if (arr[i] > arr[i + 1]) {
         //sorted = false;
         console.log("madeit");
         //setTimeout(()=>{callback(arr, i, i + 1)}, 250 * i);
-        await swap(arr, i, i + 1);
+         swap(arr, i, i + 1);
       }
     }
-    for (let i = 0; i < arr.length - 1; i++) {
+    /*for (let i = 0; i < arr.length - 1; i++) {
       if (arr[i] > arr[i + 1]) {
         sorted = false;
       }
     }
-  }
+  }*/
 }
 
-async function swap(list, first, second) {
+function swap(list, first, second) {
   console.log("swapp" + first.toString());
 
-  //setTimeout(() => {
+  setTimeout(() => {
   //console.log("timeout");
   let a = list[first];
   list[first] = list[second];
   list[second] = a;
-  await changeCols();
-  //}, 100 * first);
+  changeCols();
+  }, 1000 * first);
+}
+function highlight(){
+  
 }
