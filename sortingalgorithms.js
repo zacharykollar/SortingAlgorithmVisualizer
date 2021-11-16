@@ -28,10 +28,13 @@ function loadVisuals() {
 
 function changeCols() {
   for (let i = 0; i < arr.length; i++) {
-   // setTimeout(() => {
-      let b = document.getElementById("col" + i.toString());
-      changeColGraphics(b, i);
-   // }, 1500 * i);
+    // setTimeout(() => {
+    let b = document.getElementById("col" + i.toString());
+    let temp = document.getElementById("col" + i.toString());
+
+    changeColGraphics(b, i);
+
+    // }, 1500 * i);
   }
 }
 
@@ -48,15 +51,15 @@ function changeColGraphics(col, colid) {
 function bubbleSort(callback) {
   //while (!sorted) {
   //  sorted = true;
-    for (let i = 0; i < arr.length - 1; i++) {
-      if (arr[i] > arr[i + 1]) {
-        //sorted = false;
-        console.log("madeit");
-        //setTimeout(()=>{callback(arr, i, i + 1)}, 250 * i);
-         swap(arr, i, i + 1);
-      }
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] > arr[i + 1]) {
+      //sorted = false;
+      console.log("madeit");
+      //setTimeout(()=>{callback(arr, i, i + 1)}, 250 * i);
+      swap(arr, i, i + 1);
     }
-    /*for (let i = 0; i < arr.length - 1; i++) {
+  }
+  /*for (let i = 0; i < arr.length - 1; i++) {
       if (arr[i] > arr[i + 1]) {
         sorted = false;
       }
@@ -66,15 +69,29 @@ function bubbleSort(callback) {
 
 function swap(list, first, second) {
   console.log("swapp" + first.toString());
-
   setTimeout(() => {
-  //console.log("timeout");
-  let a = list[first];
-  list[first] = list[second];
-  list[second] = a;
-  changeCols();
+    //console.log("timeout");
+    let a = list[first];
+    list[first] = list[second];
+    list[second] = a;
+    doc1 = document.getElementById("col" + first.toString());
+    doc2 = document.getElementById("col" + second.toString());
+    highlight(doc1, doc2);
+    setTimeout(() => {
+      dehighlight(doc1, doc2);
+    }, 1000);
+    changeCols();
   }, 1000 * first);
 }
-function highlight(){
-  
+function highlight() {
+  console.log("high");
+  for (let a of arguments) {
+    a.style.color = "blue";
+  }
+}
+function dehighlight() {
+  console.log("high");
+  for (let a of arguments) {
+    a.style.color = "black";
+  }
 }
