@@ -1,5 +1,11 @@
 var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var sorted = false;
+var sorts = 0;
+var timedelay = 150;
+var defaultcolor = "hotpink";
+var highlightcolor = "blue";
+var comparecolor = "green";
+
 function createArray() {
   sorted = false;
   for (let i = 0; i < arr.length; i++) {
@@ -9,6 +15,7 @@ function createArray() {
 
 function randArray() {
   sorted = false;
+  sorts = 0;
   for (let i = 0; i < arr.length; i++) {
     arr[i] = Math.floor(Math.random() * 100 + 1);
   }
@@ -29,49 +36,54 @@ function loadVisuals() {
 function changeCols() {
   for (let i = 0; i < arr.length; i++) {
     let b = document.getElementById("col" + i.toString());
-    let temp = document.getElementById("col" + i.toString());
     changeColGraphics(b, i);
   }
 }
 
 function changeColGraphics(col, colid) {
-  console.log("timeout");
   col.innerHTML = arr[colid].toString();
   col.style.height = (arr[colid] * 5 + 15).toString() + "px";
 }
 
-function bubbleSort() {
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] > arr[i + 1]) {
-      swap(arr, i, i + 1);
+async function bubbleSort() {
+  while (sorts < arr.length - 1 && !sorted) {
+    sorted = true;
+    for (let i = 0; i < arr.length - (1 + sorts); i++) {
+      let compare1 = document.getElementById("col" + i.toString());
+      let compare2 = document.getElementById("col" + (i + 1).toString());
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          //highlight(comparecolor, compare1, compare2);
+          if (arr[i] > arr[i + 1]) {
+            sorted = false;
+            swap(arr, i, i + 1);
+          }
+          resolve();
+        }, timedelay)
+      );
+      //highlight(defaultcolor, compare1, compare2);
     }
+    sorts++;
   }
+  console.log("done");
 }
 
 function swap(list, first, second) {
-  console.log("swapp" + first.toString());
+  let a = list[first];
+  list[first] = list[second];
+  list[second] = a;
+  doc1 = document.getElementById("col" + first.toString());
+  doc2 = document.getElementById("col" + second.toString());
+  highlight(highlightcolor, doc1, doc2);
   setTimeout(() => {
-    let a = list[first];
-    list[first] = list[second];
-    list[second] = a;
-    doc1 = document.getElementById("col" + first.toString());
-    doc2 = document.getElementById("col" + second.toString());
-    highlight(doc1, doc2);
-    setTimeout(() => {
-      dehighlight(doc1, doc2);
-    }, 1000);
-    changeCols();
-  }, 1000 * first);
+    highlight(defaultcolor, doc1, doc2);
+  }, timedelay);
+  changeCols();
 }
-function highlight() {
-  console.log("high");
+function highlight(col) {
   for (let a of arguments) {
-    a.style.color = "blue";
-  }
-}
-function dehighlight() {
-  console.log("high");
-  for (let a of arguments) {
-    a.style.color = "black";
+    if (a.style) {
+      a.style.backgroundColor = col;
+    }
   }
 }
