@@ -53,15 +53,18 @@ async function bubbleSort() {
       let compare2 = document.getElementById("col" + (i + 1).toString());
       await new Promise((resolve) =>
         setTimeout(() => {
-          //highlight(comparecolor, compare1, compare2);
           if (arr[i] > arr[i + 1]) {
             sorted = false;
             swap(arr, i, i + 1);
+          } else {
+            highlight(comparecolor, compare1, compare2);
+            setTimeout(() => {
+              highlight(defaultcolor, compare1, compare2);
+            }, timedelay);
           }
           resolve();
         }, timedelay)
       );
-      //highlight(defaultcolor, compare1, compare2);
     }
     sorts++;
   }
@@ -74,16 +77,17 @@ function swap(list, first, second) {
   list[second] = a;
   doc1 = document.getElementById("col" + first.toString());
   doc2 = document.getElementById("col" + second.toString());
+  console.log("highlight");
   highlight(highlightcolor, doc1, doc2);
   setTimeout(() => {
     highlight(defaultcolor, doc1, doc2);
   }, timedelay);
   changeCols();
 }
-function highlight(col) {
+function highlight(color) {
   for (let a of arguments) {
     if (a.style) {
-      a.style.backgroundColor = col;
+      a.style.backgroundColor = color;
     }
   }
 }
