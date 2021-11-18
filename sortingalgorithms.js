@@ -6,6 +6,8 @@ var defaultcolor = "hotpink";
 var highlightcolor = "blue";
 var comparecolor = "green";
 var searchval = document.getElementById("searchval");
+let inserts = 1;
+
 //these are the algorithms
 function binarySearch(array) {
   let x = searchval.value;
@@ -62,37 +64,42 @@ async function bubbleSort() {
     sorts++;
   }
   console.log("done");
-  //binarySearch(arr, arr[Math.floor(Math.random() * 10)]);
 }
 
 async function insertionSort() {
-  while (sorts < arr.length - 1 && !sorted) {
-    //iterate through the array and find sorts
-    for (let i = 0; i < arr.length - 1; i++) {
-      if (arr[i] <= arr[i + 1]) {
-        sorts++;
-      } else {
-        console.log("breaking");
-        break;
-      }
+  console.log(arr);
+  inserts = 1;
+  for (let i = inserts; i < arr.length-1; i++) {//check for number of sorted elements
+    if (arr[i] >= arr[i - 1] || i == 0){
+      inserts++;
+    } else{
+      break;
     }
-    for (let i = 0; i < sorts - 1; i++) {
-      highlight(comparecolor, document.getElementById("col" + (i).toString()));
-    }
-    console.log("unbroken");
-    for (let i = 0; i < arr.length - 1; i++) {
-      console.log("welcome");
-      if (arr[sorts] >= arr[i] && arr[sorts] <= arr[i + 1]) {
-        await new Promise ((resolve) =>
-        setTimeout(() => {
-          swap(arr, sorts, i);
-        console.log("swapped");
-        resolve();
-        }, timedelay));
-      }
-    }
-    sorts++;
   }
+  let element = arr[inserts];
+  console.log(element);
+  console.log(inserts);
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      for (let i = 0; i < inserts; i++) {
+        if (element <= arr[i]) {
+          for (let a = inserts; a > i; a--) {
+            console.log("doing it");
+            arr[a] = arr[a - 1];
+            console.log(arr);
+          }
+          console.log(i);
+          console.log(arr[i]);
+
+          arr[i] = element;
+        }
+        console.log(arr);
+        resolve();
+      }
+      
+    }, timedelay)
+  );
+  inserts++;
 }
 
 //here down are tool functions/generics
