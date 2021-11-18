@@ -67,16 +67,24 @@ async function bubbleSort() {
 }
 
 async function insertionSort() {
-  console.log(arr);
+  let br = false;
   inserts = 1;
-  for (let i = inserts; i < arr.length-1; i++) {//check for number of sorted elements
-    if (arr[i] >= arr[i - 1] || i == 0){
+  if (sorted){
+    console.log("already sorted");
+    return;
+  }
+  //while (inserts < arr.length - 1) {
+  for (let i = inserts; i < arr.length - 1; i++) {
+    //check for number of sorted elements
+    if (arr[i] >= arr[i - 1] || i == 0) {
       inserts++;
-    } else{
+    } else {
       break;
     }
   }
+  doc1 = document.getElementById("col" + inserts.toString());
   let element = arr[inserts];
+  highlight(highlightcolor, doc1);
   console.log(element);
   console.log(inserts);
   await new Promise((resolve) =>
@@ -84,23 +92,31 @@ async function insertionSort() {
       for (let i = 0; i < inserts; i++) {
         if (element <= arr[i]) {
           for (let a = inserts; a > i; a--) {
-            console.log("doing it");
             arr[a] = arr[a - 1];
-            console.log(arr);
           }
-          console.log(i);
-          console.log(arr[i]);
-
           arr[i] = element;
+          highlight(
+            comparecolor,
+            document.getElementById("col" + i.toString())
+          );
+          setTimeout(() => {}, timedelay);
+          br = true;
         }
-        console.log(arr);
         resolve();
+        if (br) {
+          break;
+        }
       }
-      
     }, timedelay)
   );
+  if(inserts == arr.length-1){
+    sorted = true;
+  }
   inserts++;
+  removeHighlights();
+  changeCols();
 }
+//}
 
 //here down are tool functions/generics
 function createArray() {
@@ -154,6 +170,12 @@ function swap(list, first, second) {
     highlight(defaultcolor, doc1, doc2);
   }, timedelay);
   changeCols();
+}
+
+function removeHighlights() {
+  for (let i = 0; i < arr.length; i++) {
+    highlight(defaultcolor, document.getElementById("col" + i.toString()));
+  }
 }
 
 function highlight(color) {
