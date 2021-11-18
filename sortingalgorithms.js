@@ -1,12 +1,11 @@
 var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var sorted = false;
 var sorts = 0;
-var timedelay = 150;
+var timedelay = 1500;
 var defaultcolor = "hotpink";
 var highlightcolor = "blue";
 var comparecolor = "green";
 var searchval = document.getElementById("searchval");
-let inserts = 1;
 
 //these are the algorithms
 function binarySearch(array) {
@@ -65,15 +64,14 @@ async function bubbleSort() {
   }
   console.log("done");
 }
-
+//this needs a handler written at some point
 async function insertionSort() {
   let br = false;
-  inserts = 1;
+  let inserts = 1;
   if (sorted){
     console.log("already sorted");
     return;
   }
-  //while (inserts < arr.length - 1) {
   for (let i = inserts; i < arr.length - 1; i++) {
     //check for number of sorted elements
     if (arr[i] >= arr[i - 1] || i == 0) {
@@ -116,7 +114,6 @@ async function insertionSort() {
   removeHighlights();
   changeCols();
 }
-//}
 
 //here down are tool functions/generics
 function createArray() {
