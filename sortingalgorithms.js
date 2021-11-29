@@ -1,7 +1,7 @@
 var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var sorted = false;
 var sorts = 0;
-var timedelay = 1500;
+var timedelay = 500;
 var defaultcolor = "hotpink";
 var highlightcolor = "blue";
 var comparecolor = "green";
