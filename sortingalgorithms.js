@@ -46,6 +46,7 @@ async function loopHandler(func) {
   }
 }
 
+//functions properly
 async function bubbleSort() {
   while (sorts < arr.length - 1 && !sorted) {
     sorted = true;
@@ -71,7 +72,8 @@ async function bubbleSort() {
   }
   console.log("done");
 }
-//this needs a handler written at some point
+
+//handler active; loopHandler(func)
 async function insertionSort() {
   let br = false;
   let inserts = 1;
@@ -121,6 +123,13 @@ async function insertionSort() {
   removeHighlights();
   changeCols();
   loopHandler(insertionSort());
+}
+
+//start at bottom, pull up vals until you find one that is lower swap them
+async function selectionSort() {
+  for (let i = 0; i < arr.length - 1; i++){
+    
+  }
 }
 
 //here down are tool functions/generics
