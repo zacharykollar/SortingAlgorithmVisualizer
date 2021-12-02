@@ -1,7 +1,7 @@
 var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var sorted = false;
 var sorts = 0;
-var timedelay = 1500;
+var timedelay = 500;
 var defaultcolor = "hotpink";
 var highlightcolor = "blue";
 var comparecolor = "green";
@@ -127,29 +127,24 @@ async function insertionSort() {
 
 //start at bottom, pull up vals until you find one that is lower swap them
 async function selectionSort() {
-  await new Promise(
-    (resolve) =>
-      setTimeout(() => {
-        for (let i = 0; i < arr.length - 1; i++) {
-          //select moveable
-          highlight(highlightcolor, i);
+  for (let i = 0; i < arr.length - 1; i++) {
+    //select moveable
+    highlight(highlightcolor, i);
+    setTimeout(() => {
+      for (let a = i; a < arr.length; a++) {
+        //select inner
 
-          for (let a = i; a < arr.length; a++) {
-            //select inner
-            setTimeout(() => {}, timedelay);
-
-            if (arr[a] < arr[i]) {
-              console.log("here");
-              swap(arr, a, i);
-            }
-          }
-
-          removeHighlights();
+        if (arr[a] < arr[i]) {
+          setTimeout(() => {
+            console.log("here");
+          }, timedelay);
+          swap(arr, a, i);
         }
-        resolve();
-      }),
-    timedelay
-  );
+      }
+    }, timedelay * i);
+  }
+
+  removeHighlights();
 }
 
 //here down are tool functions/generics
