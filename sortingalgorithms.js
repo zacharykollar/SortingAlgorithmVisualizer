@@ -39,6 +39,13 @@ function binarySearch(array) {
   }
 }
 
+//to use, call this function from a button and from the end of the function you want to loop with that function as a parameter.
+async function loopHandler(func) {
+  if (!sorted) {
+    func;
+  }
+}
+
 async function bubbleSort() {
   while (sorts < arr.length - 1 && !sorted) {
     sorted = true;
@@ -68,7 +75,7 @@ async function bubbleSort() {
 async function insertionSort() {
   let br = false;
   let inserts = 1;
-  if (sorted){
+  if (sorted) {
     console.log("already sorted");
     return;
   }
@@ -107,12 +114,13 @@ async function insertionSort() {
       }
     }, timedelay)
   );
-  if(inserts == arr.length-1){
+  if (inserts == arr.length - 1) {
     sorted = true;
   }
   inserts++;
   removeHighlights();
   changeCols();
+  loopHandler(insertionSort());
 }
 
 //here down are tool functions/generics
