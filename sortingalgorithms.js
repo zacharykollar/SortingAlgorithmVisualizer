@@ -1,29 +1,43 @@
 var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var sorted = false;
 var sorts = 0;
-var timedelay = 1500;
+var timedelay = 750;
 var defaultcolor = "hotpink";
 var highlightcolor = "blue";
 var comparecolor = "green";
-var searchval = document.getElementById("searchval");
+//var searchval = document.getElementById("searchval");
 
 //these are the algorithms
 function binarySearch(array) {
+  if (document.getElementById("searchval").value != null){
+    console.log("exists");
+  } else {
+    console.log("nonexistant");
+  }
   let x = searchval.value;
+  console.log(x.toString() + ":start");
   if (sorted) {
     let start = 0,
       end = array.length - 1;
     // Iterate while start not meets end
     while (start <= end) {
       // Find the mid index
+      
       let mid = Math.floor((start + end) / 2);
+      highlight(comparecolor, mid);
+      console.log(x.toString() + ":" + arr[mid].toString());
       // If element is present at mid, return True
-      if (arr[mid] === x) {
-        console.log(mid.toString() + ":" + x);
+      if (arr[mid] == x) {
+        
+        console.log("Found at: " + mid.toString() + ":" + x);
         highlight(
           highlightcolor,
           document.getElementById("col" + mid.toString())
         );
+        setTimeout(() => {
+          removeHighlights();
+        }, timedelay);
+        
         return;
       }
       // Else look in left or right half accordingly
@@ -33,10 +47,14 @@ function binarySearch(array) {
         end = mid - 1;
       }
     }
-    console.log("Does not Exist");
+    console.log(x.toString() + " Does not Exist");
   } else {
     console.log("Sort before searching");
+    setTimeout(() => {
+      removeHighlights();
+    }, timedelay);
   }
+
 }
 
 //to use, call this function from a button and from the end of the function you want to loop with that function as a parameter.
@@ -145,6 +163,7 @@ async function selectionSort() {
       }
     }, timedelay * i);
   }
+  sorted = true;
 }
 
 //here down are tool functions/generics
