@@ -127,25 +127,29 @@ async function insertionSort() {
 
 //start at bottom, pull up vals until you find one that is lower swap them
 async function selectionSort() {
-  for (let i = 0; i < arr.length - 1; i++) {
-    //select moveable
-    highlight(highlightcolor, i);
-    await new Promise(
-      (resolve) =>
-        setTimeout(() => {
+  await new Promise(
+    (resolve) =>
+      setTimeout(() => {
+        for (let i = 0; i < arr.length - 1; i++) {
+          //select moveable
+          highlight(highlightcolor, i);
+
           for (let a = i; a < arr.length; a++) {
             //select inner
+            setTimeout(() => {}, timedelay);
+
             if (arr[a] < arr[i]) {
               console.log("here");
               swap(arr, a, i);
-              resolve();
             }
           }
-        }),
-      timedelay
-    );
-    removeHighlights();
-  }
+
+          removeHighlights();
+        }
+        resolve();
+      }),
+    timedelay
+  );
 }
 
 //here down are tool functions/generics
