@@ -1,7 +1,7 @@
 var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var sorted = false;
 var sorts = 0;
-var timedelay = 500;
+var timedelay = 1500;
 var defaultcolor = "hotpink";
 var highlightcolor = "blue";
 var comparecolor = "green";
@@ -129,22 +129,22 @@ async function insertionSort() {
 async function selectionSort() {
   for (let i = 0; i < arr.length - 1; i++) {
     //select moveable
+    removeHighlights();
     highlight(highlightcolor, i);
     setTimeout(() => {
       for (let a = i; a < arr.length; a++) {
         //select inner
-
+        //highlight(highlightcolor, a)
         if (arr[a] < arr[i]) {
           setTimeout(() => {
             console.log("here");
           }, timedelay);
           swap(arr, a, i);
         }
+        //highlight(defaultcolor, a);
       }
     }, timedelay * i);
   }
-
-  removeHighlights();
 }
 
 //here down are tool functions/generics
