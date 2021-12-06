@@ -9,7 +9,7 @@ var comparecolor = "green";
 
 //these are the algorithms
 function binarySearch(array) {
-  if (document.getElementById("searchval").value != null){
+  if (document.getElementById("searchval").value != null) {
     console.log("exists");
   } else {
     console.log("nonexistant");
@@ -22,13 +22,12 @@ function binarySearch(array) {
     // Iterate while start not meets end
     while (start <= end) {
       // Find the mid index
-      
+
       let mid = Math.floor((start + end) / 2);
       highlight(comparecolor, mid);
       console.log(x.toString() + ":" + arr[mid].toString());
       // If element is present at mid, return True
       if (arr[mid] == x) {
-        
         console.log("Found at: " + mid.toString() + ":" + x);
         highlight(
           highlightcolor,
@@ -37,7 +36,7 @@ function binarySearch(array) {
         setTimeout(() => {
           removeHighlights();
         }, timedelay);
-        
+
         return;
       }
       // Else look in left or right half accordingly
@@ -54,7 +53,6 @@ function binarySearch(array) {
       removeHighlights();
     }, timedelay);
   }
-
 }
 
 //to use, call this function from a button and from the end of the function you want to loop with that function as a parameter.
