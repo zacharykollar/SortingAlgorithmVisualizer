@@ -5,6 +5,7 @@ var timedelay = 750;
 var defaultcolor = "hotpink";
 var highlightcolor = "blue";
 var comparecolor = "green";
+var running = true;
 //var searchval = document.getElementById("searchval");
 
 //these are the algorithms
@@ -55,15 +56,26 @@ function binarySearch(array) {
   }
 }
 
+function limiter() {
+  if (!running) {
+    return true;
+  } else {
+    console.log("Limited");
+    return false;
+
+  }
+}
+
 //to use, call this function from a button and from the end of the function you want to loop with that function as a parameter.
 async function loopHandler(func) {
-  if (!sorted) {
+  if (!sorted && limiter()) {
     func;
   }
 }
 
 //functions properly
 async function bubbleSort() {
+
   while (sorts < arr.length - 1 && !sorted) {
     sorted = true;
     for (let i = 0; i < arr.length - (1 + sorts); i++) {
@@ -143,6 +155,9 @@ async function insertionSort() {
 
 //start at bottom, pull up vals until you find one that is lower swap them
 async function selectionSort() {
+  if(!limiter()){
+    break;
+  }
   for (let i = 0; i < arr.length - 1; i++) {
     //select moveable
     removeHighlights();
