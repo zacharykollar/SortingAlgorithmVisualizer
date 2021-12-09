@@ -5,7 +5,7 @@ var timedelay = 750;
 var defaultcolor = "hotpink";
 var highlightcolor = "blue";
 var comparecolor = "green";
-var running = true;
+var running = false;
 //var searchval = document.getElementById("searchval");
 
 //these are the algorithms
@@ -62,41 +62,46 @@ function limiter() {
   } else {
     console.log("Limited");
     return false;
-
   }
 }
 
 //to use, call this function from a button and from the end of the function you want to loop with that function as a parameter.
 async function loopHandler(func) {
   if (!sorted && limiter()) {
+    running = true;
     func;
+  } else if (sorted){
+    running = false
   }
 }
 
 //functions properly
 async function bubbleSort() {
-
-  while (sorts < arr.length - 1 && !sorted) {
-    sorted = true;
-    for (let i = 0; i < arr.length - (1 + sorts); i++) {
-      let compare1 = document.getElementById("col" + i.toString());
-      let compare2 = document.getElementById("col" + (i + 1).toString());
-      await new Promise((resolve) =>
-        setTimeout(() => {
-          if (arr[i] > arr[i + 1]) {
-            sorted = false;
-            swap(arr, i, i + 1);
-          } else {
-            highlight(comparecolor, compare1, compare2);
-            setTimeout(() => {
-              highlight(defaultcolor, compare1, compare2);
-            }, timedelay);
-          }
-          resolve();
-        }, timedelay)
-      );
+  if (limiter()) {
+    running = true;
+    while (sorts < arr.length - 1 && !sorted) {
+      sorted = true;
+      for (let i = 0; i < arr.length - (1 + sorts); i++) {
+        let compare1 = document.getElementById("col" + i.toString());
+        let compare2 = document.getElementById("col" + (i + 1).toString());
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            if (arr[i] > arr[i + 1]) {
+              sorted = false;
+              swap(arr, i, i + 1);
+            } else {
+              highlight(comparecolor, compare1, compare2);
+              setTimeout(() => {
+                highlight(defaultcolor, compare1, compare2);
+              }, timedelay);
+            }
+            resolve();
+          }, timedelay)
+        );
+      }
+      sorts++;
     }
-    sorts++;
+    running = false;
   }
   console.log("done");
 }
@@ -109,6 +114,7 @@ async function insertionSort() {
     console.log("already sorted");
     return;
   }
+
   for (let i = inserts; i < arr.length - 1; i++) {
     //check for number of sorted elements
     if (arr[i] >= arr[i - 1] || i == 0) {
@@ -155,28 +161,29 @@ async function insertionSort() {
 
 //start at bottom, pull up vals until you find one that is lower swap them
 async function selectionSort() {
-  if(!limiter()){
-    break;
-  }
-  for (let i = 0; i < arr.length - 1; i++) {
-    //select moveable
-    removeHighlights();
-    highlight(highlightcolor, i);
-    setTimeout(() => {
-      for (let a = i; a < arr.length; a++) {
-        //select inner
-        //highlight(highlightcolor, a)
-        if (arr[a] < arr[i]) {
-          setTimeout(() => {
-            console.log("here");
-          }, timedelay);
-          swap(arr, a, i);
+  if (limiter()) {
+    running = true;
+    for (let i = 0; i < arr.length - 1; i++) {
+      //select moveable
+      removeHighlights();
+      highlight(highlightcolor, i);
+      setTimeout(() => {
+        for (let a = i; a < arr.length; a++) {
+          //select inner
+          //highlight(highlightcolor, a)
+          if (arr[a] < arr[i]) {
+            setTimeout(() => {
+              console.log("here");
+            }, timedelay);
+            swap(arr, a, i);
+          }
+          //highlight(defaultcolor, a);
         }
-        //highlight(defaultcolor, a);
-      }
-    }, timedelay * i);
+      }, timedelay * i);
+    }
+    sorted = true;
+    running = false;
   }
-  sorted = true;
 }
 
 //here down are tool functions/generics
