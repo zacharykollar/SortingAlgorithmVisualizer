@@ -1,4 +1,4 @@
-var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var arr = [10];
 var sorted = false;
 var sorts = 0;
 var timedelay = 750;
