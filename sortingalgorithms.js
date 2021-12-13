@@ -1,4 +1,4 @@
-var arr = [10];
+var arr = new Array(10);
 var sorted = false;
 var sorts = 0;
 var timedelay = 750;
@@ -65,6 +65,7 @@ function limiter() {
   }
 }
 
+
 //to use, call this function from a button and from the end of the function you want to loop with that function as a parameter.
 async function loopHandler(func) {
   if (!sorted && limiter()) {
@@ -72,6 +73,22 @@ async function loopHandler(func) {
     func;
   } else if (sorted){
     running = false
+  }
+}
+
+async function quicksort(){
+  let base = arr[arr.length/2];
+  let compLeft = arr[0];
+  let compRight = arr[arr.length - 1];
+  if (compLeft === compRight){
+    quicksort();
+    return;
+  }
+  if (compLeft > compRight){
+    swap(arr, compLeft, compRight);
+  } else {
+    compLeft++;
+    compRight--;
   }
 }
 
