@@ -65,31 +65,33 @@ function limiter() {
   }
 }
 
-
 //to use, call this function from a button and from the end of the function you want to loop with that function as a parameter.
 async function loopHandler(func) {
   if (!sorted && limiter()) {
     running = true;
     func;
-  } else if (sorted){
-    running = false
+  } else if (sorted) {
+    running = false;
   }
 }
 
-async function quicksort(){
-  let base = arr[arr.length/2];
-  let compLeft = arr[0];
-  let compRight = arr[arr.length - 1];
-  if (compLeft === compRight){
-    quicksort();
+async function quickSort() {
+  let base = arr.length / 2;
+  let compLeft = 0;
+  let compRight = arr.length - 1;
+  if (compLeft === compRight) {
+    //quicksort();
     return;
   }
-  if (compLeft > compRight){
-    swap(arr, compLeft, compRight);
-  } else {
-    compLeft++;
-    compRight--;
-  }
+  //while (compLeft != compRight) {
+    if (arr[compLeft] > arr[base] && arr[compRight] < arr[base]) {
+      swap(arr, compLeft, compRight);
+    } else if (arr[compLeft] < arr[base]) {
+      compLeft++;
+    } else if (arr[compRight] > arr[base]) {
+      compRight--;
+    }
+  //}
 }
 
 //functions properly
