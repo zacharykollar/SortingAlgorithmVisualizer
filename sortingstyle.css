@@ -11,3 +11,6 @@ p {
   background-color: hotpink;
   border: 3px solid black;
 }
+h1 {
+  text-align: center;
+}
