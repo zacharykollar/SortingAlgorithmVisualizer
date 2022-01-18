@@ -225,11 +225,11 @@ function randArray() {
 function loadVisuals() {
   createArray();
   for (let i = 0; i < arr.length; i++) {
-    let b = document.createElement("P");
+    let b = document.getElementById("values").createElement("P");
     changeColGraphics(b, i);
     b.classList.className = "worker";
     b.id = "col" + i.toString();
-    document.body.appendChild(b);
+    document.body.getElementById("values").appendChild(b);
   }
 }
 
