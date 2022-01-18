@@ -228,8 +228,9 @@ function loadVisuals() {
     let b = document.createElement("P");
     changeColGraphics(b, i);
     b.classList.className = "worker";
+    let block = document.getElementById("values");
     b.id = "col" + i.toString();
-    document.getElementById("values").appendChild(b);
+    block.appendChild(b);
   }
 }
 
