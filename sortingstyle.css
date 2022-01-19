@@ -1,20 +1,25 @@
 button {
   min-height: 10px;
 }
-#col4 {
-  color: black;
-}
 p {
-  width: 5%;
   text-align: center;
-  display: inline-flex;
-  background-color: hotpink;
-  border: 3px solid black;
 }
 h1 {
+  text-align: center;
+}
+h2 {
   text-align: center;
 }
 #values{
   background-color: grey;
   border: 3px solid black;
+  text-align: center;
+}
+.worker{
+  text-align: center;
+  font-size: larger;
+  display: inline-block;
+  width: 9%;
+  border: 3px solid black;
+  background-color: hotpink;
 }

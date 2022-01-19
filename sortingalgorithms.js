@@ -226,8 +226,8 @@ function loadVisuals() {
   createArray();
   for (let i = 0; i < arr.length; i++) {
     let b = document.createElement("P");
+    b.className = "worker";
     changeColGraphics(b, i);
-    b.classList.className = "worker";
     let block = document.getElementById("values");
     b.id = "col" + i.toString();
     block.appendChild(b);
